@@ -1,64 +1,469 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Octivane Edits</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial,sans-serif;
-        }
+  <title>Octivane Edits</title>
 
-        body{
-            background:#000;
-            color:#fff;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
-            text-align:center;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
 
-        h1{
-            font-size:60px;
-            color:#ff0000;
-        }
+    body {
+      font-family: Arial, sans-serif;
+      background: #050505;
+      color: white;
+      overflow-x: hidden;
+    }
 
-        p{
-            margin-top:15px;
-            font-size:20px;
-            color:#ccc;
-        }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 0, 0, 0.18), transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(255, 0, 0, 0.12), transparent 30%);
+      z-index: -2;
+    }
 
-        .btn{
-            display:inline-block;
-            margin-top:30px;
-            padding:15px 35px;
-            background:#ff0000;
-            color:white;
-            text-decoration:none;
-            border-radius:8px;
-            transition:.3s;
-        }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+      z-index: 1000;
+    }
 
-        .btn:hover{
-            background:#cc0000;
-        }
-    </style>
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #ff1a1a;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 0 0 15px red;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 28px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: red;
+      text-shadow: 0 0 10px red;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 20px 50px;
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.9)),
+        url("https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-content {
+      max-width: 850px;
+    }
+
+    .hero h1 {
+      font-size: clamp(55px, 10vw, 120px);
+      color: red;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      text-shadow:
+        0 0 10px red,
+        0 0 30px red,
+        0 0 60px darkred;
+    }
+
+    .hero h2 {
+      margin-top: 10px;
+      font-size: clamp(22px, 4vw, 42px);
+      color: #eeeeee;
+      letter-spacing: 4px;
+    }
+
+    .hero p {
+      margin: 22px auto;
+      max-width: 650px;
+      color: #cccccc;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .buttons {
+      margin-top: 32px;
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+      border: 1px solid red;
+    }
+
+    .btn-red {
+      background: red;
+      color: white;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+    }
+
+    .btn-red:hover {
+      transform: translateY(-4px);
+      background: #cc0000;
+      box-shadow: 0 0 35px red;
+    }
+
+    .btn-dark {
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+    }
+
+    .btn-dark:hover {
+      background: red;
+      transform: translateY(-4px);
+    }
+
+    section {
+      padding: 90px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 42px;
+      color: red;
+      margin-bottom: 50px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-shadow: 0 0 12px red;
+    }
+
+    .about-box {
+      max-width: 950px;
+      margin: auto;
+      padding: 45px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 0, 0, 0.35);
+      border-radius: 18px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 35px rgba(255, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    .about-box p {
+      color: #cfcfcf;
+      line-height: 1.9;
+      font-size: 18px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 0, 0, 0.3);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: 0.35s;
+      backdrop-filter: blur(10px);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: red;
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-content {
+      padding: 22px;
+    }
+
+    .card-content h3 {
+      color: red;
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    .card-content p {
+      color: #bbbbbb;
+      line-height: 1.6;
+    }
+
+    .video-box {
+      max-width: 900px;
+      margin: auto;
+      aspect-ratio: 16 / 9;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 2px solid red;
+      box-shadow: 0 0 35px rgba(255, 0, 0, 0.3);
+    }
+
+    .video-box iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .contact-box {
+      max-width: 750px;
+      margin: auto;
+      padding: 45px;
+      border-radius: 18px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 0, 0, 0.35);
+    }
+
+    .contact-box p {
+      color: #c8c8c8;
+      font-size: 18px;
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid rgba(255, 0, 0, 0.3);
+      color: #888;
+      background: #020202;
+    }
+
+    @media (max-width: 850px) {
+      nav {
+        padding: 15px 5%;
+      }
+
+      nav ul {
+        gap: 12px;
+      }
+
+      nav ul li a {
+        font-size: 12px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 75px 6%;
+      }
+
+      .about-box,
+      .contact-box {
+        padding: 28px;
+      }
+
+      .section-title {
+        font-size: 32px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      nav ul {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+      }
+
+      .hero h2 {
+        font-size: 20px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div>
-    <h1>Octivane Edits</h1>
-    <p>Official Website - Coming Soon</p>
+  <nav>
+    <div class="logo">Octivane Edits</div>
 
-    <a class="btn" href="#">Subscribe</a>
-</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#edits">Edits</a></li>
+      <li><a href="#video">Videos</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Octivane</h1>
+      <h2>Premium Car Edits</h2>
+
+      <p>
+        Welcome to the official Octivane Edits website.
+        Cinematic car edits, powerful transitions, speed,
+        luxury and automotive passion — all in one place.
+      </p>
+
+      <div class="buttons">
+        <a href="#edits" class="btn btn-red">Explore Edits</a>
+
+        <a href="#" class="btn btn-dark" target="_blank">
+          Subscribe
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 class="section-title">About</h2>
+
+    <div class="about-box">
+      <p>
+        Octivane Edits is a creative automotive editing brand focused on
+        cinematic car videos, smooth transitions, luxury vehicles and
+        high-energy visual effects. Every edit is created to showcase
+        the beauty, speed and power of cars.
+      </p>
+    </div>
+  </section>
+
+  <section id="edits">
+    <h2 class="section-title">Featured Edits</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <img
+          src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=900&q=80"
+          alt="Luxury car edit"
+        />
+
+        <div class="card-content">
+          <h3>Luxury Edit</h3>
+          <p>
+            Cinematic visuals featuring premium and luxury automobiles.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img
+          src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80"
+          alt="Sports car edit"
+        />
+
+        <div class="card-content">
+          <h3>Speed Edit</h3>
+          <p>
+            Fast transitions, energetic beats and powerful sports cars.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img
+          src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=900&q=80"
+          alt="Night car edit"
+        />
+
+        <div class="card-content">
+          <h3>Night Edit</h3>
+          <p>
+            Dark roads, neon lighting and aggressive cinematic styling.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="video">
+    <h2 class="section-title">Latest Video</h2>
+
+    <div class="video-box">
+      <iframe
+        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+        title="Octivane Edits Video"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="section-title">Connect</h2>
+
+    <div class="contact-box">
+      <p>
+        Follow Octivane Edits for more cinematic car edits,
+        automotive content and upcoming projects.
+      </p>
+
+      <div class="social-links">
+        <a href="#" class="btn btn-red" target="_blank">YouTube</a>
+        <a href="#" class="btn btn-dark" target="_blank">Instagram</a>
+        <a href="#" class="btn btn-dark" target="_blank">Pinterest</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Octivane Edits. All Rights Reserved.
+  </footer>
 
 </body>
 </html>
